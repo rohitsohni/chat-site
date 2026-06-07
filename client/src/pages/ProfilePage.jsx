@@ -31,8 +31,8 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className='min-h-screen bg-cover bg-no-repeat flex items-center justify-center'>
-      <div className='w-5/6 max-w-2xl backdrop-blur-2xl text-gray-300 border-2 border-gray-600 flex items-center justify-between max-sm:flex-col-reverse rounded-lg'>
+    <div className='min-h-screen bg-cover bg-no-repeat flex items-center justify-center px-5'>
+      <div className='w-5/6 max-w-2xl backdrop-blur-2xl bg-slate-950/55 text-cyan-50 border border-cyan-200/35 shadow-2xl shadow-cyan-950/40 flex items-center justify-between max-sm:flex-col-reverse rounded-lg'>
         <form onSubmit={handleSubmit} className="flex flex-col gap-5 p-10 flex-1">
           <h3 className="text-lg">Profile details</h3>
           <label htmlFor="avatar" className='flex items-center gap-3 cursor-pointer'>
@@ -41,10 +41,10 @@ const ProfilePage = () => {
             upload profile image
           </label>
           <input onChange={(e)=>setName(e.target.value)} value={name}
-           type="text" required placeholder='Your name' className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500'/>
-           <textarea onChange={(e)=>setBio(e.target.value)} value={bio} placeholder="Write profile bio" required className="p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500" rows={4}></textarea>
+           type="text" required placeholder='Your name' className='p-2 border border-cyan-200/30 bg-white/10 text-white placeholder-cyan-100/65 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300'/>
+           <textarea onChange={(e)=>setBio(e.target.value)} value={bio} placeholder="Write profile bio" required className="p-2 border border-cyan-200/30 bg-white/10 text-white placeholder-cyan-100/65 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300" rows={4}></textarea>
 
-           <button type="submit" className="bg-gradient-to-r from-purple-400 to-violet-600 text-white p-2 rounded-full text-lg cursor-pointer">Save</button>
+           <button type="submit" className="bg-gradient-to-r from-cyan-400 to-blue-600 text-white p-2 rounded-full text-lg cursor-pointer shadow-lg shadow-cyan-950/35">Save</button>
         </form>
         <img className={`max-w-44 aspect-square rounded-full mx-10 max-sm:mt-10 ${selectedImg && 'rounded-full'}`} src={authUser?.profilePic || assets.logo_icon} alt="" />
       </div>

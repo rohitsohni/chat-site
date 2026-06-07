@@ -15,6 +15,7 @@ import menu_icon from './menu_icon.png'
 import arrow_icon from './arrow_icon.png'
 import code from './code.svg'
 import bgImage from './bgImage.svg'
+import chatBlueBackground from './chat_blue_background.jpg'
 import pic1 from './pic1.png'
 import pic2 from './pic2.png'
 import pic3 from './pic3.png'
@@ -35,6 +36,7 @@ const assets = {
     arrow_icon,
     code,
     bgImage,
+    chatBlueBackground,
     profile_martin
 }
 

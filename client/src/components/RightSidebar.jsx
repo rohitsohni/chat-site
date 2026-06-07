@@ -17,7 +17,7 @@ const RightSidebar = () => {
     },[messages])
 
   return selectedUser && (
-    <div className={`bg-[#8185B2]/10 text-white w-full relative overflow-y-scroll ${selectedUser ? "max-md:hidden" : ""}`}>
+    <div className={`bg-slate-950/30 text-white w-full relative overflow-y-scroll border-l border-cyan-200/15 ${selectedUser ? "max-md:hidden" : ""}`}>
 
         <div className='pt-16 flex flex-col items-center gap-2 text-xs font-light mx-auto'>
             <img src={selectedUser?.profilePic || assets.avatar_icon} alt=""
@@ -29,20 +29,20 @@ const RightSidebar = () => {
             <p className='px-10 mx-auto'>{selectedUser.bio}</p>
         </div>
 
-        <hr className="border-[#ffffff50] my-4"/>
+        <hr className="border-cyan-100/20 my-4"/>
 
         <div className="px-5 text-xs">
             <p>Media</p>
-            <div className='mt-2 max-h-[200px] overflow-y-scroll grid grid-cols-2 gap-4 opacity-80'>
+            <div className='mt-2 max-h-[200px] overflow-y-scroll grid grid-cols-2 gap-4 opacity-90'>
                 {msgImages.map((url, index)=>(
-                    <div key={index} onClick={()=> window.open(url)} className='cursor-pointer rounded'>
+                    <div key={index} onClick={()=> window.open(url)} className='cursor-pointer rounded border border-cyan-100/15 overflow-hidden'>
                         <img src={url} alt="" className='h-full rounded-md'/>
                     </div>
                 ))}
             </div>
         </div>
 
-        <button onClick={()=> logout()} className='absolute bottom-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-400 to-violet-600 text-white border-none text-sm font-light py-2 px-20 rounded-full cursor-pointer'>
+        <button onClick={()=> logout()} className='absolute bottom-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-cyan-400 to-blue-600 text-white border-none text-sm font-light py-2 px-20 rounded-full cursor-pointer shadow-lg shadow-cyan-950/35'>
             Logout
         </button>
     </div>
