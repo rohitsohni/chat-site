@@ -44,8 +44,9 @@ const LoginPage = () => {
 
         {currState === "Sign up" && !isDataSubmitted && (
           <div className='flex flex-col gap-1'>
+            <label htmlFor="username" className='text-sm text-cyan-50/80'>Username</label>
             <input onChange={(e)=>setFullName(e.target.value)} value={fullName}
-             type="text" minLength={3} maxLength={30} className='p-2 border border-cyan-200/30 bg-white/10 text-white placeholder-cyan-100/65 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300' placeholder="Username" required/>
+             id="username" name="username" autoComplete="username" type="text" minLength={3} maxLength={30} className='p-2 border border-cyan-200/30 bg-white/10 text-white placeholder-cyan-100/65 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300' placeholder="Username" required/>
             <p className='text-xs text-cyan-50/60'>Use 3 to 30 characters.</p>
           </div>
         )}
@@ -53,13 +54,15 @@ const LoginPage = () => {
         {!isDataSubmitted && (
           <>
           <div className='flex flex-col gap-1'>
+            <label htmlFor="email" className='text-sm text-cyan-50/80'>Email Address</label>
             <input onChange={(e)=>setEmail(e.target.value)} value={email}
-             type="email" placeholder='Email Address' required className='p-2 border border-cyan-200/30 bg-white/10 text-white placeholder-cyan-100/65 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300'/>
+             id="email" name="email" autoComplete="email" type="email" placeholder='Email Address' required className='p-2 border border-cyan-200/30 bg-white/10 text-white placeholder-cyan-100/65 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300'/>
             <p className='text-xs text-cyan-50/60'>Enter a valid email, like name@example.com.</p>
           </div>
           <div className='flex flex-col gap-1'>
+            <label htmlFor="password" className='text-sm text-cyan-50/80'>Password</label>
             <input onChange={(e)=>setPassword(e.target.value)} value={password}
-             type="password" minLength={6} maxLength={32} placeholder='Password' required className='p-2 border border-cyan-200/30 bg-white/10 text-white placeholder-cyan-100/65 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300'/>
+             id="password" name="password" autoComplete={currState === "Sign up" ? "new-password" : "current-password"} type="password" minLength={6} maxLength={32} placeholder='Password' required className='p-2 border border-cyan-200/30 bg-white/10 text-white placeholder-cyan-100/65 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300'/>
             <p className='text-xs text-cyan-50/60'>Use 6 to 32 characters.</p>
           </div>
           </>
