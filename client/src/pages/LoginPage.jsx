@@ -43,16 +43,25 @@ const LoginPage = () => {
          </h2>
 
         {currState === "Sign up" && !isDataSubmitted && (
-          <input onChange={(e)=>setFullName(e.target.value)} value={fullName}
-           type="text" className='p-2 border border-cyan-200/30 bg-white/10 text-white placeholder-cyan-100/65 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300' placeholder="Full Name" required/>
+          <div className='flex flex-col gap-1'>
+            <input onChange={(e)=>setFullName(e.target.value)} value={fullName}
+             type="text" minLength={3} maxLength={30} className='p-2 border border-cyan-200/30 bg-white/10 text-white placeholder-cyan-100/65 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300' placeholder="Username" required/>
+            <p className='text-xs text-cyan-50/60'>Use 3 to 30 characters.</p>
+          </div>
         )}
 
         {!isDataSubmitted && (
           <>
-          <input onChange={(e)=>setEmail(e.target.value)} value={email}
-           type="email" placeholder='Email Address' required className='p-2 border border-cyan-200/30 bg-white/10 text-white placeholder-cyan-100/65 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300'/>
-          <input onChange={(e)=>setPassword(e.target.value)} value={password}
-           type="password" placeholder='Password' required className='p-2 border border-cyan-200/30 bg-white/10 text-white placeholder-cyan-100/65 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300'/>
+          <div className='flex flex-col gap-1'>
+            <input onChange={(e)=>setEmail(e.target.value)} value={email}
+             type="email" placeholder='Email Address' required className='p-2 border border-cyan-200/30 bg-white/10 text-white placeholder-cyan-100/65 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300'/>
+            <p className='text-xs text-cyan-50/60'>Enter a valid email, like name@example.com.</p>
+          </div>
+          <div className='flex flex-col gap-1'>
+            <input onChange={(e)=>setPassword(e.target.value)} value={password}
+             type="password" minLength={6} maxLength={32} placeholder='Password' required className='p-2 border border-cyan-200/30 bg-white/10 text-white placeholder-cyan-100/65 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300'/>
+            <p className='text-xs text-cyan-50/60'>Use 6 to 32 characters.</p>
+          </div>
           </>
         )}
 
