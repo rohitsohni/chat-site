@@ -1,12 +1,19 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import assets from '../assets/assets'
 import { ChatContext } from '../../context/ChatContext'
 import { AuthContext } from '../../context/AuthContext'
 
 const RightSidebar = () => {
 
-    const {selectedUser} = useContext(ChatContext)
+    const {selectedUser, messages} = useContext(ChatContext)
     const {logout, onlineUsers} = useContext(AuthContext)
+    const [msgImages, setMsgImages] = useState([])
+
+    useEffect(()=>{
+        setMsgImages(
+            messages.filter(msg => msg.image).map(msg=>msg.image)
+        )
+    },[messages])
 
   return selectedUser && (
     <div className={`bg-slate-950/30 text-white w-full relative overflow-y-scroll border-l border-cyan-200/15 ${selectedUser ? "max-md:hidden" : ""}`}>
@@ -19,6 +26,19 @@ const RightSidebar = () => {
                 {selectedUser.fullName}
             </h1>
             <p className='px-10 mx-auto'>{selectedUser.bio}</p>
+        </div>
+
+        <hr className="border-cyan-100/20 my-4"/>
+
+        <div className="px-5 text-xs">
+            <p>Media</p>
+            <div className='mt-2 max-h-[200px] overflow-y-scroll grid grid-cols-2 gap-4 opacity-90'>
+                {msgImages.map((url, index)=>(
+                    <div key={index} onClick={()=> window.open(url)} className='cursor-pointer rounded border border-cyan-100/15 overflow-hidden'>
+                        <img src={url} alt="" className='h-full rounded-md'/>
+                    </div>
+                ))}
+            </div>
         </div>
 
         <button onClick={()=> logout()} className='absolute bottom-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-cyan-400 to-blue-600 text-white border-none text-sm font-light py-2 px-20 rounded-full cursor-pointer shadow-lg shadow-cyan-950/35'>
