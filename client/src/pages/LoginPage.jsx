@@ -28,7 +28,9 @@ const LoginPage = () => {
     <div className='min-h-screen bg-cover bg-center flex items-center justify-center gap-8 sm:justify-evenly max-sm:flex-col backdrop-blur-sm px-5'>
 
       {/* -------- left -------- */}
-      <img src={assets.logo_big} alt="" className='w-[min(30vw,250px)] drop-shadow-[0_12px_32px_rgba(6,182,212,0.35)]'/>
+      <h1 className='max-w-xs text-center text-5xl font-semibold leading-tight text-cyan-50 drop-shadow-[0_12px_32px_rgba(6,182,212,0.35)] max-sm:text-4xl'>
+        Chat Messenger
+      </h1>
 
       {/* -------- right -------- */}
 
