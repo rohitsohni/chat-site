@@ -25,7 +25,10 @@ const Sidebar = () => {
     <div className={`bg-slate-950/30 h-full p-5 rounded-r-xl overflow-y-scroll text-white border-r border-cyan-200/15 ${selectedUser ? "max-md:hidden" : ''}`}>
       <div className='pb-5'>
         <div className='flex justify-between items-center'>
-            <img src={assets.logo} alt="logo" className='max-w-40 hue-rotate-[95deg] saturate-150' />
+            <div className='flex items-center gap-2'>
+                <img src={assets.logo_icon} alt="" className='w-8 drop-shadow-[0_8px_18px_rgba(34,211,238,0.35)]' />
+                <p className='text-lg font-semibold text-cyan-50'>Chat Messenger</p>
+            </div>
             <div className="relative py-2 group">
                 <img src={assets.menu_icon} alt="Menu" className='max-h-5 cursor-pointer' />
                 <div className='absolute top-full right-0 z-20 w-32 p-5 rounded-md bg-slate-950/95 border border-cyan-200/25 text-cyan-50 shadow-xl shadow-cyan-950/35 hidden group-hover:block'>
