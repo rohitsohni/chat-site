@@ -3,6 +3,8 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import cloudinary from "../lib/cloudinary.js"
 
+const ONLINE_WINDOW_MS = 45 * 1000;
+
 // Signup a new user
 export const signup = async (req, res)=>{
     const { fullName, email, password, bio } = req.body;
@@ -60,6 +62,23 @@ export const login = async (req, res) =>{
 // Controller to check if user is authenticated
 export const checkAuth = (req, res)=>{
     res.json({success: true, user: req.user});
+}
+
+// Update current user's presence and return all recently active users
+export const updatePresence = async (req, res)=>{
+    try {
+        const now = new Date();
+        await User.findByIdAndUpdate(req.user._id, { lastSeen: now });
+
+        const onlineUsers = await User.find({
+            lastSeen: { $gte: new Date(Date.now() - ONLINE_WINDOW_MS) }
+        }).distinct("_id");
+
+        res.json({ success: true, onlineUsers: onlineUsers.map(String) });
+    } catch (error) {
+        console.log(error.message);
+        res.json({ success: false, message: error.message });
+    }
 }
 
 // Controller to update user profile details

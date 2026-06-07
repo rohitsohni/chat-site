@@ -6,6 +6,7 @@ import { io } from "socket.io-client"
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 axios.defaults.baseURL = backendUrl;
+const PRESENCE_INTERVAL_MS = 15000;
 
 export const AuthContext = createContext();
 
@@ -35,11 +36,11 @@ const login = async (state, credentials)=>{
     try {
         const { data } = await axios.post(`/api/auth/${state}`, credentials);
         if (data.success){
-            setAuthUser(data.userData);
-            connectSocket(data.userData);
             axios.defaults.headers.common["token"] = data.token;
             setToken(data.token);
             localStorage.setItem("token", data.token)
+            setAuthUser(data.userData);
+            connectSocket(data.userData);
             toast.success(data.message)
         }else{
             toast.error(data.message)
@@ -75,6 +76,18 @@ const login = async (state, credentials)=>{
         }
     }
 
+    const refreshPresence = async ()=>{
+        if(!authUser) return;
+        try {
+            const { data } = await axios.put("/api/auth/presence");
+            if(data.success){
+                setOnlineUsers(data.onlineUsers);
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
     // Connect socket function to handle socket connection and online users updates
     const connectSocket = (userData)=>{
         if(!userData || socket?.connected) return;
@@ -85,10 +98,6 @@ const login = async (state, credentials)=>{
         });
         newSocket.connect();
         setSocket(newSocket);
-
-        newSocket.on("getOnlineUsers", (userIds)=>{
-            setOnlineUsers(userIds);
-        })
     }
 
     useEffect(()=>{
@@ -97,6 +106,15 @@ const login = async (state, credentials)=>{
         }
         checkAuth();
     },[])
+
+    useEffect(()=>{
+        if(!authUser || !token) return;
+
+        refreshPresence();
+        const intervalId = setInterval(refreshPresence, PRESENCE_INTERVAL_MS);
+
+        return ()=> clearInterval(intervalId);
+    },[authUser, token])
 
     const value = {
         axios,
