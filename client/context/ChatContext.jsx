@@ -5,8 +5,8 @@ import toast from "react-hot-toast";
 
 export const ChatContext = createContext();
 
-const MESSAGE_POLL_INTERVAL_MS = 2500;
-const USERS_POLL_INTERVAL_MS = 5000;
+const MESSAGE_POLL_INTERVAL_MS = 500;
+const USERS_POLL_INTERVAL_MS = 1000;
 
 const haveSameMessages = (currentMessages, nextMessages)=>{
     if(currentMessages.length !== nextMessages.length) return false;
