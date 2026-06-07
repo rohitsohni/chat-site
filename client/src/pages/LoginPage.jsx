@@ -10,6 +10,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("")
   const [bio, setBio] = useState("")
   const [isDataSubmitted, setIsDataSubmitted] = useState(false);
+  const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d).{6,32}$/;
 
   const {login} = useContext(AuthContext)
 
@@ -17,6 +18,9 @@ const LoginPage = () => {
     event.preventDefault();
 
     if(currState === 'Sign up' && !isDataSubmitted){
+      if(!passwordPattern.test(password)){
+        return;
+      }
       setIsDataSubmitted(true)
       return;
     }
@@ -62,8 +66,8 @@ const LoginPage = () => {
           <div className='flex flex-col gap-1'>
             <label htmlFor="password" className='text-sm text-cyan-50/80'>Password</label>
             <input onChange={(e)=>setPassword(e.target.value)} value={password}
-             id="password" name="password" autoComplete={currState === "Sign up" ? "new-password" : "current-password"} type="password" minLength={6} maxLength={32} placeholder='Password' required className='p-2 border border-cyan-200/30 bg-white/10 text-white placeholder-cyan-100/65 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300'/>
-            <p className='text-xs text-cyan-50/60'>Use 6 to 32 characters.</p>
+             id="password" name="password" autoComplete={currState === "Sign up" ? "new-password" : "current-password"} type="password" minLength={6} maxLength={32} pattern={currState === "Sign up" ? "(?=.*[A-Za-z])(?=.*\\d).{6,32}" : undefined} title="Use 6 to 32 characters with at least one letter and one number." placeholder='Password' required className='p-2 border border-cyan-200/30 bg-white/10 text-white placeholder-cyan-100/65 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-300'/>
+            <p className='text-xs text-cyan-50/60'>Use 6 to 32 characters with letters and numbers.</p>
           </div>
           </>
         )}
