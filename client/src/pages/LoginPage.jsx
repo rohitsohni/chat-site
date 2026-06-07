@@ -66,11 +66,6 @@ const LoginPage = () => {
           {currState === "Sign up" ? "Create Account" : "Login Now"}
         </button>
 
-        <div className='flex items-center gap-2 text-sm text-cyan-50/70'>
-          <input type="checkbox" />
-          <p>Agree to the terms of use & privacy policy.</p>
-        </div>
-
         <div className='flex flex-col gap-2'>
           {currState === "Sign up" ? (
             <p className='text-sm text-cyan-50/70'>Already have an account? <span onClick={()=>{setCurrState("Login"); setIsDataSubmitted(false)}} className='font-medium text-cyan-300 cursor-pointer'>Login here</span></p>
