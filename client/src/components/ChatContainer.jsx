@@ -62,7 +62,6 @@ const ChatContainer = () => {
             {onlineUsers.includes(selectedUser._id) && <span className="w-2 h-2 rounded-full bg-green-500"></span>}
         </p>
         <img onClick={()=> setSelectedUser(null)} src={assets.arrow_icon} alt="" className='md:hidden max-w-7'/>
-        <img src={assets.help_icon} alt="" className='max-md:hidden max-w-5'/>
       </div>
       {/* ------- chat area ------- */}
       <div className='flex flex-col h-[calc(100%-120px)] overflow-y-scroll p-3 pb-6'>
