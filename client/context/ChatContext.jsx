@@ -5,6 +5,24 @@ import toast from "react-hot-toast";
 
 export const ChatContext = createContext();
 
+const MESSAGE_POLL_INTERVAL_MS = 2500;
+const USERS_POLL_INTERVAL_MS = 5000;
+
+const haveSameMessages = (currentMessages, nextMessages)=>{
+    if(currentMessages.length !== nextMessages.length) return false;
+
+    return currentMessages.every((message, index)=> message._id === nextMessages[index]?._id && message.seen === nextMessages[index]?.seen);
+}
+
+const haveSameUnseenMessages = (currentUnseen, nextUnseen)=>{
+    const currentKeys = Object.keys(currentUnseen);
+    const nextKeys = Object.keys(nextUnseen);
+
+    if(currentKeys.length !== nextKeys.length) return false;
+
+    return currentKeys.every((key)=> currentUnseen[key] === nextUnseen[key]);
+}
+
 export const ChatProvider = ({ children })=>{
 
     const [messages, setMessages] = useState([]);
@@ -12,30 +30,30 @@ export const ChatProvider = ({ children })=>{
     const [selectedUser, setSelectedUser] = useState(null)
     const [unseenMessages, setUnseenMessages] = useState({})
 
-    const {socket, axios} = useContext(AuthContext);
+    const {socket, axios, authUser} = useContext(AuthContext);
 
     // function to get all users for sidebar
-    const getUsers = async () =>{
+    const getUsers = async ({ silent = false } = {}) =>{
         try {
             const { data } = await axios.get("/api/messages/users");
             if (data.success) {
                 setUsers(data.users)
-                setUnseenMessages(data.unseenMessages)
+                setUnseenMessages((prevUnseenMessages)=> haveSameUnseenMessages(prevUnseenMessages, data.unseenMessages) ? prevUnseenMessages : data.unseenMessages)
             }
         } catch (error) {
-            toast.error(error.message)
+            if(!silent) toast.error(error.message)
         }
     }
 
     // function to get messages for selected user
-    const getMessages = async (userId)=>{
+    const getMessages = async (userId, { silent = false } = {})=>{
         try {
             const { data } = await axios.get(`/api/messages/${userId}`);
             if (data.success){
-                setMessages(data.messages)
+                setMessages((prevMessages)=> haveSameMessages(prevMessages, data.messages) ? prevMessages : data.messages)
             }
         } catch (error) {
-            toast.error(error.message)
+            if(!silent) toast.error(error.message)
         }
     }
 
@@ -79,6 +97,23 @@ export const ChatProvider = ({ children })=>{
         subscribeToMessages();
         return ()=> unsubscribeFromMessages();
     },[socket, selectedUser])
+
+    useEffect(()=>{
+        if(!authUser) return;
+
+        getUsers({ silent: true });
+        const intervalId = setInterval(()=> getUsers({ silent: true }), USERS_POLL_INTERVAL_MS);
+
+        return ()=> clearInterval(intervalId);
+    },[authUser])
+
+    useEffect(()=>{
+        if(!selectedUser) return;
+
+        const intervalId = setInterval(()=> getMessages(selectedUser._id, { silent: true }), MESSAGE_POLL_INTERVAL_MS);
+
+        return ()=> clearInterval(intervalId);
+    },[selectedUser])
 
     const value = {
         messages, users, selectedUser, getUsers, getMessages, sendMessage, setSelectedUser, unseenMessages, setUnseenMessages
