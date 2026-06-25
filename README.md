@@ -6,6 +6,10 @@ Full-stack real-time chat application with authentication, profile management, o
 
 [Open Chat Site](https://client-gilt-rho.vercel.app)
 
+## Preview
+
+![Chat Site signup screen](docs/screenshots/live-demo.png)
+
 ## Project Highlights
 
 - Built a React/Vite single-page application with protected chat, login, signup, and profile flows.
@@ -119,6 +123,10 @@ Backend:
 npm run server
 npm start
 ```
+
+## Quality Checks
+
+This repository includes a GitHub Actions CI workflow that installs dependencies, lints the frontend, builds the frontend, and verifies backend dependency installation on every push and pull request to `main`.
 
 ## Interview Notes
 
