@@ -135,3 +135,7 @@ This repository includes a GitHub Actions CI workflow that installs dependencies
 - `server/server.js` wires Express, Socket.IO, CORS, routes, and the MongoDB connection.
 - `server/controllers/messageController.js` handles message retrieval, sending, seen status, and image upload payloads.
 - `server/middleware/auth.js` protects private API routes by validating JWT tokens.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
