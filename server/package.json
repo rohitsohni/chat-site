@@ -1,7 +1,7 @@
 {
-  "name": "server",
+  "name": "chat-site-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Express + Socket.IO backend for the Chat Site real-time chat app.",
   "main": "server.js",
   "scripts": {
     "server": "nodemon server.js",
@@ -10,7 +10,7 @@
   "type": "module",
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cloudinary": "^2.6.0",
@@ -19,7 +19,9 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.14.1",
-    "nodemon": "^3.1.10",
     "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
