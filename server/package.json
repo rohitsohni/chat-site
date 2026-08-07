@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "server": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "delete-user": "node scripts/delete-user-everywhere.js"
   },
   "type": "module",
   "keywords": [],
