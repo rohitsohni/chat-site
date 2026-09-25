@@ -8,7 +8,7 @@ Full-stack real-time chat application with authentication, profile management, o
 
 ## Preview
 
-![Chat Site signup screen](docs/screenshots/live-demo.png)
+<img width="1280" height="720" alt="Chat Site signup screen" src="https://github.com/user-attachments/assets/cffd3747-696b-4802-9f00-ffd586dc05f9" />
 
 ## Project Highlights
 
