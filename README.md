@@ -5,7 +5,7 @@
     <img height="42" src="https://img.shields.io/badge/Open_Site-2563EB?style=for-the-badge" alt="Open Site" />
   </a>
   <br><br>
-  <img width="1280" height="720" alt="Chat Site signup screen" src="https://github.com/user-attachments/assets/cffd3747-696b-4802-9f00-ffd586dc05f9" />
+  <img width="1280" height="720" alt="Chat Site signup screen" src="docs/preview.png" />
 </div>
 
 ## Project overview
